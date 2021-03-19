@@ -21,10 +21,10 @@ int main(int argc, char **argv)
     return 1;
   }
 
-
+  fstream plik;
   BazaTestu   BazaT = { nullptr, 0, 0 };
 
-  if (InicjalizujTest(&BazaT,argv[1]) == false) {
+  if (InicjalizujTest(plik,argv[1]) == false) {
     cerr << " Inicjalizacja testu nie powiodla sie." << endl;
     return 1;
   }
@@ -34,14 +34,14 @@ int main(int argc, char **argv)
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
 
-
+  
   LZespolona Odpowiedz, Wynik;
   WyrazenieZesp   WyrZ_PytanieTestowe;
   statystyka stat;
   inicjuj(stat);
 
 
-  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
+  while (PobierzNastpnePytanie( plik ,&WyrZ_PytanieTestowe)) {
 
     cout << "Podaj wynik operacji:" << WyrZ_PytanieTestowe << " ";
 
@@ -78,10 +78,12 @@ int main(int argc, char **argv)
   Wyswietl(stat);
 
   
+  
   cout << endl;
   cout << " Koniec testu" << endl;
   cout << endl;
 
+  plik.close();
 }
 
 

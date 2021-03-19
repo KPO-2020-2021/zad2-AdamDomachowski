@@ -6,6 +6,23 @@
 using namespace std;
 
 
+istream & operator >> (istream &wej,  WyrazenieZesp  &WyrZ){
+    char znak;
+    wej>>(WyrZ.Arg1);
+    wej>>znak;
+    
+    if(znak == '+') WyrZ.Op=Op_Dodaj; //WyrZ.Op przyjmuje wartosci od 0 - 3 nalezy je potem odszyfrowac
+    else if(znak == '-') WyrZ.Op=Op_Odejmij;
+    else if(znak == '*') WyrZ.Op=Op_Mnoz;
+    else if(znak == '/') WyrZ.Op=Op_Dziel;
+    else wej.setstate(ios::badbit);
+  
+   wej>>(WyrZ.Arg2);
+   return wej;
+}
+
+
+
 void Wyswietl(WyrazenieZesp  WyrZ)
 {
 

@@ -1,10 +1,27 @@
 #include <iostream>
 #include <cmath>
 #include "LZespolona.hh"
+#include <cmath>
 
-using namespace std;
+#define MIN_DIFF 0.01
 
+/*!
+ * Realizuje porównanie dwoch liczb zespolonych.
+ * Argumenty:
+ *    Skl1 - pierwsza porównywana liczba zespolona,
+ *    Skl2 - druga porównywana liczba zespolona.
+ * Zwraca:
+ *    True dla równych liczb zespolonych.
+ */
 
+bool  operator == (LZespolona  Skl1,  LZespolona  Skl2){
+
+  if (abs(Skl1.re - Skl2.re) <= MIN_DIFF && abs(Skl1.im - Skl2.im) <= MIN_DIFF)
+    return true;
+  else
+    return false;
+  
+}
 
 // opreacje matematyczne
 
@@ -160,11 +177,3 @@ istream & operator >> (istream &wej, LZespolona &LZesp)
 
 
 
-bool operator == (LZespolona  Skl1,  LZespolona  Skl2)
-{
-  if(abs(Skl1.re - Skl2.re) <= 0.01  &&  abs(Skl1.im - Skl2.im) <= 0.01)
-  {
-    return true;
-  }
-  return false;
-}

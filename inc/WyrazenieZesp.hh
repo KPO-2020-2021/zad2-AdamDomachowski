@@ -32,5 +32,6 @@ void Wyswietl(WyrazenieZesp  WyrZ);
 LZespolona Oblicz(WyrazenieZesp  WyrZ);
 
 ostream & operator << (ostream &wyj, const WyrazenieZesp  WyrZ);
+istream & operator >> (istream &wej,  WyrazenieZesp  &WyrZ);
 
 #endif

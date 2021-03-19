@@ -8,25 +8,26 @@ using namespace std;
 /*
  * Tablica, ktora jest widoczna tylko w tym module.
  * Zawiera ona tresc latwego testu.
- */
+ 
 static WyrazenieZesp  TestLatwy[] =
   { {{2,1}, Op_Dodaj, {1,2}},
     {{1,0}, Op_Odejmij, {0,1}},
     {{3,0}, Op_Mnoz, {0,3}},
     {{4,8}, Op_Dziel, {1,0}},
   };
+*/
 
 /*
  * Analogicznie zdefiniuj test "trudne"
  *
- */
+ 
 static WyrazenieZesp  TestTrudny[] =
   { {{5,1}, Op_Dodaj, {1.98,2.56}},
     {{2,0}, Op_Odejmij, {0.9,1}},
     {{7,0}, Op_Mnoz, {0.5,3}},
     {{66,8}, Op_Dziel, {123,0}},
   };
-
+*/
 
 
 
@@ -77,15 +78,27 @@ void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned in
  *              zainicjalizowany,
  *       false - w przypadku przeciwnym.
  */
-bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
+bool InicjalizujTest( fstream &plik, const char *sNazwaTestu )
 {
   if (!strcmp(sNazwaTestu,"latwy")) {
-    UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
+    plik.open("latwy.dat",ios::in);
+    if(!plik.good())
+    {
+      cerr<<"plik nie istnieje"<<endl;
+      exit(0);
+    }
+    //UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
     return true;
   }
 
   else if (!strcmp(sNazwaTestu,"trudny")) {
-    UstawTest(wskBazaTestu,TestTrudny,sizeof(TestTrudny)/sizeof(WyrazenieZesp));
+    plik.open("trudny.dat",ios::in);
+      if(!plik.good())
+    {
+      cerr<<"plik nie istnieje"<<endl;
+      exit(0);
+    }
+    //UstawTest(wskBazaTestu,TestTrudny,sizeof(TestTrudny)/sizeof(WyrazenieZesp));
     return true;
   }
   /*
@@ -117,11 +130,25 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
  *              przypisane nowe wyrazenie zespolone z bazy,
  *       false - w przypadku przeciwnym.
  */
-bool PobierzNastpnePytanie( BazaTestu  *wskBazaTestu, WyrazenieZesp *wskWyrazenie )
+bool PobierzNastpnePytanie( fstream &plik, WyrazenieZesp *wskWyrazenie )
 {
-  if (wskBazaTestu->IndeksPytania >= wskBazaTestu->IloscPytan) return false;
+  WyrazenieZesp zesp;
+  while(1)
+  {
+  if (plik.eof()) return false;
 
-  *wskWyrazenie = wskBazaTestu->wskTabTestu[wskBazaTestu->IndeksPytania];
-  ++wskBazaTestu->IndeksPytania;
+  plik >> zesp;
+  //cout<<zesp;
+  if(plik.good())
+  {
+    break;
+  }
+  plik.clear(); //zerujemy informacje o bledzie
+  plik.ignore(1024,'\n'); //czyscimy bufor pamieci
+  cerr << "Napotkano bledne wyrazenie. Zostalo ono pominiete."<< endl;
+  }
+  *wskWyrazenie=zesp;
+  
+  
   return true;
 }
