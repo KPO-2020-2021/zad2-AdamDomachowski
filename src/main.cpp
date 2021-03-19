@@ -1,5 +1,7 @@
 #include <iostream>
 #include "BazaTestu.hh"
+#include "statystyka.hh"
+
 
 using namespace std;
 
@@ -8,6 +10,8 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+
+  
 
   if (argc < 2) {
     cout << endl;
@@ -25,18 +29,53 @@ int main(int argc, char **argv)
     return 1;
   }
 
-
   
   cout << endl;
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
 
+
+  LZespolona Odpowiedz, Wynik;
   WyrazenieZesp   WyrZ_PytanieTestowe;
-  
+  statystyka stat;
+  inicjuj(stat);
+
+
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cout << " Czesc rzeczywista pierwszego argumentu: ";
-    cout << WyrZ_PytanieTestowe.Arg1.re << endl;
+
+    cout << "Podaj wynik operacji:" << WyrZ_PytanieTestowe << " ";
+
+    
+    for(int i=0; i<3; i++) //sprawdzanie poprawnosci wpisania
+    {
+    cin>>Odpowiedz;
+      if(cin.bad())
+        {
+          cout<< "blad wczytania";
+        }
+      else
+        {
+          break;
+        }
+      cin.clear(); //zerujemy informacje o bledzie
+      cin.ignore(1024,'\n'); //czyscimy bufor pamieci
+    }
+
+    Wynik = Oblicz (WyrZ_PytanieTestowe);
+
+    if (Wynik == Odpowiedz) //porownanie odpowiedzi do wyniku
+      {
+        cout<<"!!! DOBRZE !!!"<<endl;
+        stat.poprawne++;
+      }
+    else
+      {
+        cout << "ZLE WYNIK TO: " << Wynik << endl;
+        stat.bledne++;
+      }
+    stat.wszystkie++;  
   }
+  Wyswietl(stat);
 
   
   cout << endl;
@@ -44,3 +83,29 @@ int main(int argc, char **argv)
   cout << endl;
 
 }
+
+
+
+
+
+  /*
+  cin>>Odpowiedz;
+
+  if(cin.bad())
+  {
+    cout<< "blad wczytania";
+  }
+  else
+  
+  cin.clear(); //zerujemy informacje o bledzie
+  cin.ignore(1024,'\n'); //czyscimy bufor pamieci
+
+  cin>>Z;
+
+  if(cin.bad())
+  {
+    cout<< "blad wczytania";
+  }
+  else
+  cout<<Z;
+  */

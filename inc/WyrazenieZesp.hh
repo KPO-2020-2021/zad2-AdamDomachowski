@@ -1,8 +1,6 @@
 #ifndef WYRAZENIEZESP_HH
 #define WYRAZENIEZESP_HH
 
-
-
 #include "LZespolona.hh"
 
 
@@ -30,6 +28,9 @@ struct WyrazenieZesp {
 
 
 void Wyswietl(WyrazenieZesp  WyrZ);
+
 LZespolona Oblicz(WyrazenieZesp  WyrZ);
+
+ostream & operator << (ostream &wyj, const WyrazenieZesp  WyrZ);
 
 #endif

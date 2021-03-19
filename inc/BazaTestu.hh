@@ -22,6 +22,7 @@ struct BazaTestu {
  * Inicjalizuje test powiazany z dana nazwa.
  */
 bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char*  sNazwaTestu );
+
 /*
  * Udostepnia nastepne pytanie z bazy.
  */
