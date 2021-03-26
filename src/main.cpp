@@ -22,7 +22,7 @@ int main(int argc, char **argv)
   }
 
   fstream plik;
-  BazaTestu   BazaT = { nullptr, 0, 0 };
+  //BazaTestu   BazaT = { nullptr, 0, 0 }; //program nie potrzebuje juz tej linijki poniewaz czyta z pliku
 
   if (InicjalizujTest(plik,argv[1]) == false) {
     cerr << " Inicjalizacja testu nie powiodla sie." << endl;
@@ -45,13 +45,14 @@ int main(int argc, char **argv)
 
     cout << "Podaj wynik operacji:" << WyrZ_PytanieTestowe << " ";
 
+    Wynik = Oblicz (WyrZ_PytanieTestowe);
     
     for(int i=0; i<3; i++) //sprawdzanie poprawnosci wpisania
     {
     cin>>Odpowiedz;
       if(cin.bad())
         {
-          cout<< "blad wczytania";
+          cout<< "blad wczytania, sprobuj ponownie: ";
         }
       else
         {
@@ -61,11 +62,11 @@ int main(int argc, char **argv)
       cin.ignore(1024,'\n'); //czyscimy bufor pamieci
     }
 
-    Wynik = Oblicz (WyrZ_PytanieTestowe);
+    
 
     if (Wynik == Odpowiedz) //porownanie odpowiedzi do wyniku
       {
-        cout<<"!!! DOBRZE !!!"<<endl;
+        cout << "!!! DOBRZE !!!" << endl;
         stat.poprawne++;
       }
     else
@@ -80,7 +81,7 @@ int main(int argc, char **argv)
   
   
   cout << endl;
-  cout << " Koniec testu" << endl;
+  cout << "Koniec testu" << endl;
   cout << endl;
 
   plik.close();

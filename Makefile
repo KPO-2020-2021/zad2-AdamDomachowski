@@ -44,8 +44,6 @@ ${TBIN}:
 test:  ${TBIN}/test_1 ${TBIN}/test_2
 	${TBIN}/test_1 
 	${TBIN}/test_2
-run:
-	${TRGDIR}/test_arytm_zesp latwy
 
 clean:
 	rm -f ${TRGDIR}/test_arytm_zesp ${OBJ}/* ${TBIN}/*

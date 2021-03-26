@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 #include "LZespolona.hh"
-#include <cmath>
 
 #define MIN_DIFF 0.01
 
@@ -39,6 +39,7 @@ LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
 
   Wynik.re = Skl1.re + Skl2.re;
   Wynik.im = Skl1.im + Skl2.im;
+
   return Wynik;
 }
 
@@ -112,6 +113,10 @@ LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2)
 LZespolona  operator / (LZespolona  Skl1,  double mianownik)
 {
   LZespolona  Wynik;
+  if(mianownik==0)
+  {
+    throw "nie dzieli się przez zero";
+  }
   Wynik.re = Skl1.re / mianownik;
   Wynik.im = Skl1.im / mianownik;
   return Wynik;
@@ -132,18 +137,18 @@ return modul;
 }
 
 
-
+/*
 void Wyswietl(LZespolona LZesp )
 {
 cout << " (" << LZesp.re << showpos << LZesp.im << "i) " << noshowpos;
 }
-
+*/
 
 
 
 ostream & operator << (ostream &wyj,const LZespolona LZesp)
 {
-wyj << " (" << LZesp.re << showpos << LZesp.im << "i) " << noshowpos;
+wyj << "(" << fixed << setprecision(2) << LZesp.re << showpos << fixed << setprecision(2) << LZesp.im << "i)" << noshowpos;
 return wyj;
 }
 
