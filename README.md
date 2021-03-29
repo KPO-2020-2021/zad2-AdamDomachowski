@@ -36,3 +36,8 @@ Repozytorium z zalążkiem do zadania ma następującą strukturę:
 
 
 
+## informacje o opcjach
+- program potrafi czytać z pliku, uruchamiając go z nazwą danego pliku na końcu ( nazwa bez rozszerzenia )
+- program nie pozwoli dzielić przez zero ( poprostu przestanie działać )
+
+
