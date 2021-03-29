@@ -29,6 +29,8 @@ LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2); //odejmowanie
 LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2); //mnozenie
 LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2); //dzielenie zespolonej przez zespolona
 LZespolona  operator / (LZespolona  Skl1,  double mianownik); //dzielenie zespolonej przez liczbe
+LZespolona operator += (LZespolona Skl1, LZespolona const Skl2);
+LZespolona operator /= (LZespolona Skl1, LZespolona const Skl2);
 
 
 
@@ -38,6 +40,7 @@ double Modul2(LZespolona);
 
 
 void Wyswietl(LZespolona LZesp );
+double arg(LZespolona z); // oblicza modul l zespolonej
 
 
 ostream & operator << (ostream &wyj,const LZespolona LZesp);

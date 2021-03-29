@@ -44,6 +44,7 @@ LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
 }
 
 
+
 /*
  * Realizuje odejmowanie dwoch liczb zespolonych.
  * Argumenty:
@@ -123,11 +124,14 @@ LZespolona  operator / (LZespolona  Skl1,  double mianownik)
 }
 
 
+
 //sprzezenie
 LZespolona Sprzezenie(LZespolona LZesp){
 LZesp.im = LZesp.im * (-1);
 return LZesp;
 }
+
+
 
 //modul
 double Modul2(LZespolona LZesp){
@@ -135,6 +139,7 @@ double modul;
 modul = sqrt( (LZesp.re * LZesp.re) + (LZesp.im * LZesp.im) );
 return modul;
 }
+
 
 
 /*
@@ -151,7 +156,6 @@ ostream & operator << (ostream &wyj,const LZespolona LZesp)
 wyj << "(" << fixed << setprecision(2) << LZesp.re << showpos << fixed << setprecision(2) << LZesp.im << "i)" << noshowpos;
 return wyj;
 }
-
 
 
 
@@ -180,5 +184,61 @@ istream & operator >> (istream &wej, LZespolona &LZesp)
 }
 
 
+
+LZespolona operator += (LZespolona Skl1, LZespolona const Skl2)
+{
+  return Skl1 = Skl1 + Skl2;
+}
+
+
+
+LZespolona operator /= (LZespolona Skl1, LZespolona const Skl2)
+{
+  return Skl1 = Skl1 / Skl2;
+}
+
+
+
+double arg(LZespolona z)
+{
+  double argument;
+
+  if(z.re == 0 && z.im == 0) //przypadek gdy z=0
+  {
+    throw "argument jest nie okreslony";
+  }
+
+  if(z.re != 0) //przypadek dla liczb o niezerowej czesci rzeczywistej
+  {
+    if (z.re > 0)
+    {
+      argument = atan2(z.im, z.re);
+      cout << "1";
+    }
+    else 
+    {
+      argument = atan2(z.im, z.re); //celowo pomijam PI ponieważ wtedy wychodzą dobre wyniki
+      cout << "2";
+    }
+  }
+
+  if(z.re==0 && z.im!=0) //przypadek dla liczb z=bi
+  {
+    if(z.im > 0)
+    {
+      argument = M_PI/2;
+    }
+    else
+    {
+      argument = -M_PI/2;
+    }
+  }
+
+
+
+  cout << "argument liczby " << z << " wynosi " << argument <<endl;
+  return argument;
+
+}
 
 

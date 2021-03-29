@@ -61,3 +61,50 @@ TEST_CASE("Test LZespolona wczytywanie standardowe") {
 
     CHECK( "(99.00+99.99i)" == out.str() );
 }
+
+
+TEST_CASE("Test LZespolona += ") {
+    LZespolona x, y, z;
+    
+    x.re = 2;
+    x.im = 2;
+
+    y.re = 1;
+    y.im = 1;
+   
+    z.re = 3;
+    z.im = 3;
+
+
+    CHECK((x+=y) == z);
+}
+
+
+TEST_CASE("Test LZespolona /= ") {
+    LZespolona x, y, z;
+    
+    x.re = 2;
+    x.im = 1;
+
+    y.re = 1;
+    y.im = -4;
+   
+    z.re = -0.12;
+    z.im = 0.53;
+
+
+    CHECK((x/=y) == z);
+}
+
+TEST_CASE("Test LZespolona argument) {
+    LZespolona x;
+ 
+    x.re = -9;
+    x.im = 15;
+
+    std::ostringstream out;
+
+    out << setprecision(2) << arg(x);
+
+    CHECK("2.1" == out.str());
+}

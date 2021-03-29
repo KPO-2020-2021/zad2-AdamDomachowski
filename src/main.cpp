@@ -11,8 +11,6 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
-  
-
   if (argc < 2) {
     cout << endl;
     cout << " Brak opcji okreslajacej rodzaj testu." << endl;
@@ -46,7 +44,7 @@ int main(int argc, char **argv)
     cout << "Podaj wynik operacji:" << WyrZ_PytanieTestowe << " ";
 
     Wynik = Oblicz (WyrZ_PytanieTestowe);
-    
+
     for(int i=0; i<3; i++) //sprawdzanie poprawnosci wpisania
     {
     cin>>Odpowiedz;
@@ -62,7 +60,6 @@ int main(int argc, char **argv)
       cin.ignore(1024,'\n'); //czyscimy bufor pamieci
     }
 
-    
 
     if (Wynik == Odpowiedz) //porownanie odpowiedzi do wyniku
       {
